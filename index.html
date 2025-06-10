@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Te quiero</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            color: #A5302E;
+            text-align: center;
+            background-color: #541A19;
+            background-size: cover;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            position: relative;
+            padding: 1rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-top: 2rem;
+            text-shadow: 1px 1px 4px #000;
+        }
+
+        nav {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .bar {
+            width: 25px;
+            height: 3px;
+            background-color: rgba(0, 0, 0, 0.6);
+            margin: 4px 0;
+        }
+
+        ul.menu {
+            list-style: none;
+            display: flex;
+            gap: 1rem;
+
+        }
+
+        ul.menu li a {
+            color: #A5302E;
+            text-decoration: none;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px #000;
+        }
+
+        ul.menu li a:hover {
+            color: #581615;
+            text-decoration: none;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px #3a0000;
+        }
+
+        aside {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 1rem;
+            margin: 2rem auto;
+            max-width: 400px;
+            border-radius: 12px;
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+            }
+
+            ul.menu {
+                display: none;
+                flex-direction: column;
+                background: rgba(0, 0, 0, 0.5);
+                position: absolute;
+                top: 60px;
+                right: 1rem;
+                padding: 1rem;
+                border-radius: 10px;
+            }
+
+            ul.menu.show {
+                display: flex;
+            }
+        }
+
+        #mensaje p,
+        #mensaje1 p,
+        #mensaje2 p {
+            background: #7C2524;
+            padding: 1rem;
+            border-radius: 8px;
+            color: white;
+            text-shadow: 1px 1px 3px black;
+            transition: all 0.3s ease-in-out;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Te quiero</h1>
+        <nav>
+            <div class="menu-toggle" onclick="toggleMenu()">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+            <ul class="menu" id="menu">
+                <li id="inicio"><a href="#">Eres</a></li>
+                <li id="nosotros"><a href="#">Lo más</a></li>
+                <li id="momentos"><a href="#">Lindo</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <aside id="aside">
+            <p>Dedicado a mi persona favorita </p>
+        </aside>
+        <div id="mensaje" style="margin-top: 1rem;"></div>
+        <div id="mensaje1" style="margin-top: 1rem;"></div>
+        <div id="mensaje2" style="margin-top: 1rem;"></div>
+
+    </main>
+
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('menu');
+            menu.classList.toggle('show');
+            let aside = document.getElementById('aside');
+
+            if (menu.classList.contains('show')) {
+                aside.style.display = "none";
+            } else {
+                aside.style.display = "block";
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const botonInicio = document.getElementById("inicio");
+            const mensaje = document.getElementById("mensaje");
+            const botonNosotros = document.getElementById("nosotros");
+            const botonMomentos = document.getElementById("momentos");
+
+            botonInicio.addEventListener("click", function (e) {
+                e.preventDefault();
+                mensaje.innerHTML = "<p>Gracias por todo</p>";
+            });
+            botonNosotros.addEventListener("click", function (e) {
+                e.preventDefault();
+                mensaje1.innerHTML = "<p>Te adoro</p>";
+            });
+            botonMomentos.addEventListener("click", function (e) {
+                e.preventDefault();
+                mensaje2.innerHTML = "<p>Te quiero porque eres una persona que merece la pena conocer y cuidar, porque eres inteligente, te preocupas por los demás, eres cariñoso, divertido, sincero y guapo. <br> Me encantó el edit que me enseñaste el otro día, no me lo quito de la cabeza, está muy bien hecho, es muy bonito. Y tus fotos, son las mejores, me encantan. No sé cómo viendo lo mismo que tú, puedes sacar esa perspectiva. <br> De verdad que te quiero mucho Jose. <br> Hemos hecho tantas cosas ya, aunque nos conozcamos desde hace poco tiempo. Hemos viajado juntos, pasado varios días sin separarnos, hemos ido a hacer la compra unas cuantas veces, hemos cocinado, jugado, bebido, subido un volcán, hecho fotos, ido a la playa, sido envenenados por unas algas asesinas... y me ha encantado todo eso. <br> También me gusta no hacer nada contigo, simplemente estar a tu lado me tranquiliza, dormir contigo es lo mejor, sentir tu calor, tu piel, tu respiración... de verdad que me encanta, y poder despertarme y darte besos... es un sueño hecho realidad. Adoro hablar contigo, de cualquier tema, poder decirte lo que pienso, que me entiendas y me contestes, parece fácil, pero no lo es, no cualquier persona entiende lo que quieres decir, me pasa con la mayoría de gente. No me enrollo más. Te amo y me encanta que me hables de cualquier cosa, me ayudes con los ejercicios y me apoyes y cuides de la forma que lo haces.</p>";
+            });
+        });
+    </script>
+</body>
+
+</html>
