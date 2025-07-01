@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Te quiero</title>
+    <title>Nuestra web </title>
     <style>
         * {
             margin: 0;
@@ -14,10 +14,9 @@
 
         body {
             font-family: 'Segoe UI', sans-serif;
-            color: #A5302E;
+            color: #2c2c2c;
             text-align: center;
-            background-color: #541A19;
-            background-size: cover;
+            background-color: #fef6f0;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -29,9 +28,10 @@
         }
 
         h1 {
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             margin-top: 2rem;
-            text-shadow: 1px 1px 4px #000;
+            color: #c05a65;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
         }
 
         nav {
@@ -49,7 +49,7 @@
         .bar {
             width: 25px;
             height: 3px;
-            background-color: rgba(0, 0, 0, 0.6);
+            background-color: #c05a65;
             margin: 4px 0;
         }
 
@@ -57,29 +57,73 @@
             list-style: none;
             display: flex;
             gap: 1rem;
-
         }
 
         ul.menu li a {
-            color: #A5302E;
+            color: #c05a65;
             text-decoration: none;
             font-weight: bold;
-            text-shadow: 1px 1px 2px #000;
+            padding: 0.3rem 0.6rem;
+            border-radius: 6px;
         }
 
         ul.menu li a:hover {
-            color: #581615;
-            text-decoration: none;
-            font-weight: bold;
-            text-shadow: 1px 1px 2px #3a0000;
+            background-color: #fbd6d0;
         }
 
         aside {
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(192, 90, 101, 0.1);
             padding: 1rem;
             margin: 2rem auto;
             max-width: 400px;
             border-radius: 12px;
+            font-weight: 500;
+            color: #944;
+        }
+
+        #contenido {
+            margin: 2rem auto;
+            max-width: 800px;
+        }
+
+        .carrusel {
+            position: relative;
+            width: 300px;
+            height: 400px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        .carrusel-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .carrusel button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.7);
+            border: none;
+            font-size: 2rem;
+            padding: 0.2rem 0.6rem;
+            cursor: pointer;
+            border-radius: 50%;
+            color: #c05a65;
+        }
+
+        .carrusel button:hover {
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .carrusel button:first-of-type {
+            left: 10px;
+        }
+
+        .carrusel button:last-of-type {
+            right: 10px;
         }
 
         @media (max-width: 768px) {
@@ -90,7 +134,7 @@
             ul.menu {
                 display: none;
                 flex-direction: column;
-                background: rgba(0, 0, 0, 0.5);
+                background: #ffe6e1;
                 position: absolute;
                 top: 60px;
                 right: 1rem;
@@ -102,23 +146,12 @@
                 display: flex;
             }
         }
-
-        #mensaje p,
-        #mensaje1 p,
-        #mensaje2 p {
-            background: #7C2524;
-            padding: 1rem;
-            border-radius: 8px;
-            color: white;
-            text-shadow: 1px 1px 3px black;
-            transition: all 0.3s ease-in-out;
-        }
     </style>
 </head>
 
 <body>
     <header>
-        <h1>Te quiero</h1>
+        <h1>Nuestra web</h1>
         <nav>
             <div class="menu-toggle" onclick="toggleMenu()">
                 <div class="bar"></div>
@@ -126,54 +159,155 @@
                 <div class="bar"></div>
             </div>
             <ul class="menu" id="menu">
-                <li id="inicio"><a href="#">Eres</a></li>
-                <li id="nosotros"><a href="#">Lo más</a></li>
-                <li id="momentos"><a href="#">Lindo</a></li>
+                <li id="fotos"><a href="#">Fotos</a></li>
+                <li id="carta"><a href="#">Texto</a></li>
+                <li id="pelis"><a href="#">Pelis</a></li>
             </ul>
         </nav>
     </header>
 
     <main>
         <aside id="aside">
-            <p>Dedicado a mi persona favorita </p>
+            <p>Te amo 🤍</p>
         </aside>
-        <div id="mensaje" style="margin-top: 1rem;"></div>
-        <div id="mensaje1" style="margin-top: 1rem;"></div>
-        <div id="mensaje2" style="margin-top: 1rem;"></div>
-
+        <div id="contenido"></div>
     </main>
 
     <script>
         function toggleMenu() {
             const menu = document.getElementById('menu');
             menu.classList.toggle('show');
-            let aside = document.getElementById('aside');
+            const aside = document.getElementById('aside');
+            aside.style.display = menu.classList.contains('show') ? "none" : "block";
+        }
 
-            if (menu.classList.contains('show')) {
-                aside.style.display = "none";
-            } else {
-                aside.style.display = "block";
-            }
+        let indice = 0;
+        const imagenes = [
+            "fotos/1.jpeg",
+            "fotos/2.jpeg",
+            "fotos/3.jpeg",
+            "fotos/4.jpeg",
+            "fotos/5.jpeg",
+            "fotos/6.jpeg",
+            "fotos/7.jpeg"
+        ];
+
+        function mostrarCarrusel() {
+            document.getElementById("contenido").innerHTML = `
+        <div class="carrusel">
+          <img src="${imagenes[indice]}" class="carrusel-img" />
+          <button onclick="anterior()">⟨</button>
+          <button onclick="siguiente()">⟩</button>
+        </div>
+      `;
+        }
+
+        function anterior() {
+            indice = (indice - 1 + imagenes.length) % imagenes.length;
+            mostrarCarrusel();
+        }
+
+        function siguiente() {
+            indice = (indice + 1) % imagenes.length;
+            mostrarCarrusel();
         }
 
         document.addEventListener("DOMContentLoaded", function () {
-            const botonInicio = document.getElementById("inicio");
-            const mensaje = document.getElementById("mensaje");
-            const botonNosotros = document.getElementById("nosotros");
-            const botonMomentos = document.getElementById("momentos");
+            const botonFotos = document.getElementById("fotos");
+            const botonCarta = document.getElementById("carta");
+            const botonRecuerdos = document.getElementById("pelis");
+            const contenido = document.getElementById("contenido");
 
-            botonInicio.addEventListener("click", function (e) {
+            botonFotos.addEventListener("click", function (e) {
                 e.preventDefault();
-                mensaje.innerHTML = "<p>Gracias por todo</p>";
+                mostrarCarrusel();
             });
-            botonNosotros.addEventListener("click", function (e) {
+
+            botonCarta.addEventListener("click", function (e) {
                 e.preventDefault();
-                mensaje1.innerHTML = "<p>Te adoro</p>";
+                contenido.innerHTML = `
+          <p style="background: #c05a65; padding: 1rem; border-radius: 8px; color: white; text-shadow: 1px 1px 2px black;">
+            Te quiero por cómo eres, por cómo me haces sentir y por todo lo que compartimos. Gracias por ser tú. 💖
+          </p>
+        `;
             });
-            botonMomentos.addEventListener("click", function (e) {
+
+            botonRecuerdos.addEventListener("click", function (e) {
                 e.preventDefault();
-                mensaje2.innerHTML = "<p>Te quiero porque eres una persona que merece la pena conocer y cuidar, porque eres inteligente, te preocupas por los demás, eres cariñoso, divertido, sincero y guapo. <br> Me encantó el edit que me enseñaste el otro día, no me lo quito de la cabeza, está muy bien hecho, es muy bonito. Y tus fotos, son las mejores, me encantan. No sé cómo viendo lo mismo que tú, puedes sacar esa perspectiva. <br> De verdad que te quiero mucho Jose. <br> Hemos hecho tantas cosas ya, aunque nos conozcamos desde hace poco tiempo. Hemos viajado juntos, pasado varios días sin separarnos, hemos ido a hacer la compra unas cuantas veces, hemos cocinado, jugado, bebido, subido un volcán, hecho fotos, ido a la playa, sido envenenados por unas algas asesinas... y me ha encantado todo eso. <br> También me gusta no hacer nada contigo, simplemente estar a tu lado me tranquiliza, dormir contigo es lo mejor, sentir tu calor, tu piel, tu respiración... de verdad que me encanta, y poder despertarme y darte besos... es un sueño hecho realidad. Adoro hablar contigo, de cualquier tema, poder decirte lo que pienso, que me entiendas y me contestes, parece fácil, pero no lo es, no cualquier persona entiende lo que quieres decir, me pasa con la mayoría de gente. No me enrollo más. Te amo y me encanta que me hables de cualquier cosa, me ayudes con los ejercicios y me apoyes y cuides de la forma que lo haces.</p>";
+                contenido.innerHTML = `
+          <div style="text-align:left; background: #fbd6d0; padding: 1.5rem; border-radius: 10px; color: #944;">
+            <h3>🎬 Películas que hemos visto juntos:</h3>
+            <ul>
+              <li>The Killing of a Sacred Deer</li>
+              <li>Hereditary</li>
+              <li>Midsommar</li>
+              <li>Raw</li>
+              <li>Titane</li>
+              <li>Psycho</li>
+              <li>Fractured</li>
+              <li>Attack</li>
+              <li>Archive 81</li>
+            </ul>
+            <h3>📽️ Por ver:</h3>
+            <ul>
+              <li>Paterson</li>
+              <li>Possession (1981)</li>
+              <li>The Double Life of Veronique</li>
+              <li>The Others</li>
+              <li>Saint Maud</li>
+              <li>Trouble Every Day</li>
+              <li>Let the Right One In</li>
+              <li>Only Lovers Left Alive</li>
+              <li>In the Mood for Love</li>
+              <li>Perfect Blue</li>
+              <li>Enemy</li>
+              <li>Under the Skin</li>
+              <li>Repulsión</li>
+              <li>Persona</li>
+              <li>Sunset Boulevard</li>
+              <li>Blue Velvet</li>
+              <li>Starred Up</li>
+              <li>Antichrist</li>
+              <li>Melancholia</li>
+              <li>The Lobster</li>
+              <li>Climax</li>
+              <li>A Ghost Story</li>
+              <li>The Witch</li>
+              <li>A Cure for Wellness</li>
+              <li>Annihilation</li>
+              <li>The Babadook</li>
+            </ul>
+
+            <h3>📺 Series que estamos viendo:</h3>
+            <ul>
+            <li>Nine Perfect Strangers</li>
+            <li>The Good Place</li>
+
+            </ul>
+            <h3>🕵️‍♀️ Series por ver:</h3>
+            <ul>
+              <li>Quién mató a Sara</li>
+              <li>The OA</li>
+              <li>Twin Peaks</li>
+              <li>Sharp Objects</li>
+              <li>Dark</li>
+              <li>The Sinner</li>
+              <li>Top of the Lake</li>
+              <li>Mindhunter</li>
+              <li>Les Revenants</li>
+              <li>Behind Her Eyes</li>
+              <li>Euphoria</li>
+              <li>The Haunting of Hill House</li>
+              <li>The Leftovers</li>
+              <li>Undone</li>
+              <li>Severance</li>
+              <li>True Detective (Temporada 1)</li>
+            </ul>
+          </div>
+        `;
             });
+
+            mostrarCarrusel();
         });
     </script>
 </body>
